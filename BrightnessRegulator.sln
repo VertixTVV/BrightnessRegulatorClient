@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightnessRegulator", "BrightnessRegulator\BrightnessRegulator.csproj", "{B9B5FE25-75F3-40C2-9AE6-BC4169B01DCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightnessRegulator.Android", "BrightnessRegulator.Android\BrightnessRegulator.Android.csproj", "{0914B1BE-BC68-4751-BC89-D728279FABDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightnessRegulator.Desktop", "BrightnessRegulator.Desktop\BrightnessRegulator.Desktop.csproj", "{F0D136CC-7CE4-491C-9D7A-67C624F63539}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightnessRegulator.iOS", "BrightnessRegulator.iOS\BrightnessRegulator.iOS.csproj", "{6E308242-FE26-4ABB-948F-8CBA45821E86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrightnessRegulator.Browser", "BrightnessRegulator.Browser\BrightnessRegulator.Browser.csproj", "{6125129D-71C5-48DE-9B4E-2E1B831F243A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9B5FE25-75F3-40C2-9AE6-BC4169B01DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9B5FE25-75F3-40C2-9AE6-BC4169B01DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9B5FE25-75F3-40C2-9AE6-BC4169B01DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9B5FE25-75F3-40C2-9AE6-BC4169B01DCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0914B1BE-BC68-4751-BC89-D728279FABDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0914B1BE-BC68-4751-BC89-D728279FABDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0914B1BE-BC68-4751-BC89-D728279FABDB}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0914B1BE-BC68-4751-BC89-D728279FABDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0914B1BE-BC68-4751-BC89-D728279FABDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0914B1BE-BC68-4751-BC89-D728279FABDB}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F0D136CC-7CE4-491C-9D7A-67C624F63539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0D136CC-7CE4-491C-9D7A-67C624F63539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0D136CC-7CE4-491C-9D7A-67C624F63539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0D136CC-7CE4-491C-9D7A-67C624F63539}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E308242-FE26-4ABB-948F-8CBA45821E86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E308242-FE26-4ABB-948F-8CBA45821E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E308242-FE26-4ABB-948F-8CBA45821E86}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6E308242-FE26-4ABB-948F-8CBA45821E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E308242-FE26-4ABB-948F-8CBA45821E86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E308242-FE26-4ABB-948F-8CBA45821E86}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{6125129D-71C5-48DE-9B4E-2E1B831F243A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6125129D-71C5-48DE-9B4E-2E1B831F243A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6125129D-71C5-48DE-9B4E-2E1B831F243A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6125129D-71C5-48DE-9B4E-2E1B831F243A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
