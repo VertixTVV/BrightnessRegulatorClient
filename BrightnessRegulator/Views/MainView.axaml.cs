@@ -20,37 +20,29 @@ namespace BrightnessRegulator.Views
     public partial class MainView : UserControl
     {
         /// <summary>
-        /// Dichiarazione di tutti gli elementi
+        /// Declaration of all elements
         /// </summary>
         private TcpClient? tcpClient = new TcpClient();
-
         private List<int> _values, _values2;
-
-        /// <summary>
-        /// s1 --> succesfull
-        /// s2 --> error
-        /// </summary>
-        StackPanel s1;
-        StackPanel s2;
-
+        StackPanel s1; //---> SUCCESFULL
+        StackPanel s2; //---> ERROR
         NetworkStream stream;
-
-
+        
+        /// <summary>
+        /// Find the StackPanel declared in XAML and hides them until an attempt of connection
+        /// </summary>
         public MainView()
         {
             InitializeComponent();
-
-            // Trova gli StackPanel definiti in XAML
+            
             s1 = this.FindControl<StackPanel>("TbSuccesfullConnection");
             s2 = this.FindControl<StackPanel>("TbWrongConnection");
-
-            // Devono restare nascosti fino a connessione avvenuta
             s1.IsVisible = false;
             s2.IsVisible = false;
         }
 
         /// <summary>
-        /// Chiama in modo asincrono il metodo ConnectPc
+        /// Call the ConnectPc method asynchronously
         /// </summary>
         private async void StartTask(object? sender, RoutedEventArgs e)
         {
@@ -58,15 +50,14 @@ namespace BrightnessRegulator.Views
         }
 
         /// <summary>
-        /// Prova a connettersi con il server
+        /// Try to connect to the server
         /// </summary>
         private async Task ConnectPc(StackPanel s1, StackPanel s2)
         {
             try
             {
                 string serverIp = "192.168.178.20"; // Ip Server
-                int port = 45743; // Server Port per questa applicazione
-
+                int port = 45743; // Server Port for this application
 
                 await tcpClient.ConnectAsync(serverIp, port);
 
@@ -74,23 +65,20 @@ namespace BrightnessRegulator.Views
                 {
                     await ShowStackPanel(s1);
 
-                    // Inizializzazione della lista che conterrà i valori di luminosità e contrasto
+                    // Initialization of the lists that will contain the brightness and contrast values
                     _values = new List<int>();
                     _values2 = new List<int>();
 
-                    // Riceve dal server i dati iniziali di connessione su luminosità e contrasto
+                    // Receives initial connection data on brightness and contrast from the server
                     stream = tcpClient.GetStream();
                     _values = ReceiveSettings(_values, stream);
 
-                    // Assegnare i valori ricevuti dal server
+                    // Assigns the value received from the server
                     if (DataContext is MainViewModel viewModel && viewModel.AssignmentCommand.CanExecute(null))
                     {
-                        // Esecuzione del comando di assegnamento
+                        // Execution of assignment command
                         viewModel.AssignmentCommand.Execute(Tuple.Create(_values.First(), _values.Last()));
                     }
-
-                    //Continua a inviare al server i valori di Luminosità e contrasto, i quali continuano a modificare
-                    //dato che sono bindati allo slider presente nella MainView
                 }
                 else
                 {
@@ -104,10 +92,10 @@ namespace BrightnessRegulator.Views
         }
 
         /// <summary>
-        /// Metodo che, attraverso l'uso del dispatcher, garantisce l'accesso alla thread UI
-        /// non utilizzando il thread principale.
+        /// Method which, through the use of the dispatcher, guarantees access to the UI thread
+        /// not using the main thread.
         /// </summary>
-        /// <param name="panel"> StackPanel passato come parametro </param>
+        /// <param name="panel"> StackPanel passed like parameter </param>
         private async Task ShowStackPanel(StackPanel panel)
         {
             await Dispatcher.UIThread.InvokeAsync(() =>
@@ -115,8 +103,8 @@ namespace BrightnessRegulator.Views
                 panel.IsVisible = true;
             });
 
-            // Aspetta 3 secondi
-            await Task.Delay(3000);
+            // Wait 1 Second
+            await Task.Delay(1000);
 
             await Dispatcher.UIThread.InvokeAsync(() =>
             {
@@ -125,7 +113,7 @@ namespace BrightnessRegulator.Views
         }
 
         /// <summary>
-        /// Metodo per la gestione della dinamicità fornita allo slider.
+        /// Method for managing the dynamism provided to the slider.
         /// </summary>
         private void OnSliderChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
         {
@@ -133,41 +121,48 @@ namespace BrightnessRegulator.Views
         }
 
         /// <summary>
-        /// ???
+        /// Method for receiving data sent by the server regarding initial brightness and contrast
         /// </summary>
-        /// <param name="valuesToReceive"></param>
-        /// <param name="clientStream"></param>
-        /// <returns></returns>
+        /// <param name="valuesToReceive"> List of values to apply on Settings </param>
+        /// <param name="clientStream"> NetworkStream for hold the connection beetween client and server</param>
         public List<int> ReceiveSettings(List<int> valuesToReceive, NetworkStream clientStream)
         {
-            // Legge la lunghezza del messaggio
+            // Read the lenght of the message
             byte[] lenghtBuffer = new byte[4];
             clientStream.Read(lenghtBuffer.AsSpan(0, 4));
             int dataLenght = BitConverter.ToInt32(lenghtBuffer, 0);
 
-            // Legge i dati
+            // Read the data
             byte[] data = new byte[dataLenght];
             clientStream.Read(data, 0, dataLenght);
             string jsonString = System.Text.Encoding.UTF8.GetString(data);
 
-            // Deserializzazione della lista di interi
+            // Deserialize the list of integer
             valuesToReceive = JsonSerializer.Deserialize<List<int>>(jsonString);
             return valuesToReceive;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="valuesToSend"> List of values to send at the server </param>
+        /// <param name="clientStream"> NetworkStream for hold the connection beetween client and server </param>
         public async Task SendSettings(List<int> valuesToSend, NetworkStream clientStream)
         {
-            // Serializzazione in Json
+            // Serialize in Json
             string json = JsonSerializer.Serialize(valuesToSend);
             byte[] data = System.Text.Encoding.UTF8.GetBytes(json);
 
-            // Invio della lunghezza del messaggio e dei dati
+            // Sending message length and data
             await clientStream.WriteAsync(BitConverter.GetBytes(data.Length), 0, 4);
             await clientStream.WriteAsync(data, 0, data.Length);
 
             await Task.Delay(100);
         }
 
+        /// <summary>
+        /// Thanks to OnValueChanged Property, BrightnessSlider update himself and send new settings to server
+        /// </summary>
         private async void BrightnessSlider_OnValueChanged(object? sender, RangeBaseValueChangedEventArgs e)
         {
             if (DataContext is MainViewModel viewModel)
@@ -179,6 +174,9 @@ namespace BrightnessRegulator.Views
             }
         }
 
+        /// <summary>
+        /// Thanks to OnValueChanged Property, ContrastSlider update himself and send new settings to server
+        /// </summary>
         private async void ContrastSlider_OnValueChanged(object? sender, RangeBaseValueChangedEventArgs e)
         {
             if (DataContext is MainViewModel viewModel)

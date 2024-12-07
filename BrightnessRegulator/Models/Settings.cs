@@ -5,13 +5,13 @@ namespace BrightnessRegulator.Models;
 public class Settings : INotifyPropertyChanged
 {
     /// <summary>
-    /// Dichiarazione attributi della classe
+    /// Declaration of attribute in the class
     /// </summary>
     private int brightness;
     private int contrast;
 
     /// <summary>
-    /// Proprietà per la luminosità
+    /// Property for the brightness
     /// </summary>
     public int Brightness
     {
@@ -27,7 +27,7 @@ public class Settings : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Proprietà per il contrasto
+    /// Property for the contrast
     /// </summary>
     public int Contrast
     {
@@ -43,14 +43,10 @@ public class Settings : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Costruttore della classe Settings, ha il compito di prelevare i valori di luminosità
-    /// e contrasto dal server per applicarli agli attributi della classe
+    /// Empty Constructor for Settings class
     /// </summary>
     public Settings() { }
-
-    /// <summary>
-    /// Gestione OnProperyChanged per Settings
-    /// </summary>
+    
     public event PropertyChangedEventHandler PropertyChanged;
 
     protected virtual void OnPropertyChanged(string propertyName)

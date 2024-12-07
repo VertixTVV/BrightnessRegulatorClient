@@ -11,12 +11,12 @@ namespace BrightnessRegulator.ViewModels;
 
 public partial class MainViewModel : ViewModelBase, INotifyPropertyChanged
 {
-    // TextBlock per nome applicazione
+    
     [ObservableProperty] private string _name = "Brightness Regulator";
     Settings settings;
 
     /// <summary>
-    /// Proprietà per accedere all'istanza della classe Settings
+    /// Property to access the instance of the Settings class
     /// </summary>
     public Settings _Settings
     {
@@ -31,18 +31,15 @@ public partial class MainViewModel : ViewModelBase, INotifyPropertyChanged
         }
     }
 
-    // Dichiarazione del comando di assegnamento
+    // Declaration of assignment command
     public ICommand AssignmentCommand { get; }
-
+    
     public MainViewModel()
     {
         _Settings = new Settings();
         AssignmentCommand = new RelayCommand<Tuple<int, int>>(AssignmentSettings);
     }
-
-    /// <summary>
-    /// Gestione OnProperyChanged per MainView
-    /// </summary>
+    
     public event PropertyChangedEventHandler PropertyChanged;
     
     protected virtual void OnPropertyChanged(string propertyName)
@@ -51,9 +48,9 @@ public partial class MainViewModel : ViewModelBase, INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Metodo per assegnare i valori passati dal client alla mia classe settings
+    /// Method to assign values passed by the client to my settings class
     /// </summary>
-    /// <param name="values"></param>
+    /// <param name="values"> List of values received by the server </param>
     public void AssignmentSettings(Tuple<int, int> values)
     {
         _Settings.Brightness = values.Item1;
