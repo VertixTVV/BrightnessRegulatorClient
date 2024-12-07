@@ -1,27 +1,27 @@
-Brightness Regulator è un'applicazione composta da due parti (server e client) che consente di regolare luminosità e contrasto di un monitor direttamente dal telefono.
-Il progetto utilizza C# e Avalonia UI per l'interfaccia grafica. La gestione delle impostazioni hardware avviene tramite API di Windows, utilizzando DLL per interagire con i controlli di luminosità e contrasto del monitor.
+Brightness Regulator is a two-part (server and client) application that allows you to adjust the brightness and contrast of a monitor directly from your phone.
+The project uses C# and Avalonia UI for the GUI. Hardware settings are managed via Windows API, using DLLs to interact with the monitor's brightness and contrast controls.
 
-Descrizione Client.
+Client Description.
 
-Il client fornisce un'interfaccia grafica per permettere all'utente di:
-    Visualizzare le impostazioni attuali di luminosità e contrasto del monitor.
-    Modificare e inviare le nuove impostazioni al server.
+The client provides a GUI to allow the user to:
+    View current monitor brightness and contrast settings.
+    Modify and send the new settings to the server.
 
-Tecnologie
-    Avalonia UI: Framework per l'interfaccia grafica multipiattaforma.
-    CommunityToolkit.Mvvm: Utilizzato per l'architettura MVVM.
+Technologies
+    Avalonia UI: Cross-platform graphical user interface framework.
+    CommunityToolkit.Mvvm: Used for the MVVM architecture.
 
-Funzionalità principali
-    Interfaccia utente: Semplice e intuitiva, con slider o campi numerici per regolare luminosità e contrasto.
-    MVVM: Implementazione basata su separazione tra View, ViewModel e Model.
-    Connessione al server: Comunica con il server tramite protocollo TCP per inviare e ricevere le impostazioni.
+Key Features.
+    User Interface: Simple and intuitive, with sliders or numeric fields to adjust brightness and contrast.
+    MVVM: Implementation based on separation between View, ViewModel and Model.
+    Server Connection: Communicates with the server via TCP protocol to send and receive settings.
 
-Struttura
-    App: Configura l'applicazione e definisce il ciclo di vita dell'interfaccia.
-    MainViewModel: Gestisce la logica dell'interfaccia, incluso l'aggiornamento delle impostazioni.
-    Settings: Modello per le impostazioni di luminosità e contrasto.
-    MainWindow: Componente visivo principale.
+Structure
+    App: Configures the application and defines the interface life cycle.
+    MainViewModel: Manages the interface logic, including updating the settings.
+    Settings: Model for brightness and contrast settings.
+    MainWindow: Main visual component.
 
-Dipendenze
+Dependencies
     Avalonia UI
     CommunityToolkit.Mvvm
